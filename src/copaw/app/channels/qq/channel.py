@@ -800,7 +800,7 @@ class QQChannel(BaseChannel):
         'height': 128, 'size': 13588,
           'url': '','width': 198}
 
-        Supports MIME type matching for flexible content type detection.
+        Supports the MIME type matching for flexible content type detection.
         """
         parts: List[OutgoingContentPart] = []
         if not attachments or not self._http:
