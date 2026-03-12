@@ -12,7 +12,12 @@ import {
   Input,
 } from "@agentscope-ai/design";
 import { useTranslation } from "react-i18next";
-import api from "../../../api";
+import { useAgentConfig } from "./useAgentConfig.tsx";
+import {
+  PageHeader,
+  ReactAgentCard,
+  ContextManagementCard,
+} from "./components";
 import styles from "./index.module.less";
 import type { AgentsRunningConfig } from "../../../api/types";
 
@@ -191,24 +196,22 @@ function AgentConfigPage() {
         <div className={styles.centerState}>
           <span className={styles.stateText}>{t("common.loading")}</span>
         </div>
-      )}
+      </div>
+    );
+  }
 
-      {error && !loading && (
+  if (error) {
+    return (
+      <div className={styles.configPage}>
         <div className={styles.centerState}>
           <span className={styles.stateTextError}>{error}</span>
           <Button size="small" onClick={fetchConfig} style={{ marginTop: 12 }}>
             {t("environments.retry")}
           </Button>
         </div>
-      )}
-
-      <div style={{ display: loading || error ? "none" : "block" }}>
-        <div className={styles.header}>
-          <div>
-            <h1 className={styles.title}>{t("agentConfig.title")}</h1>
-            <p className={styles.description}>{t("agentConfig.description")}</p>
-          </div>
-        </div>
+      </div>
+    );
+  }
 
         <Form
           form={form}
